@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pensionato São Pedro</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+      #home .relative.z-10 {
+          position: relative;
+          z-index: 10; /* Mantém o texto por cima das imagens */
+          color: white; /* Ajusta o texto para maior contraste */
+          text-shadow: 2px 4px 6px rgba(0, 0, 0, 0.8); /* Sombreamento mais forte para melhor visibilidade */
+      }
+
+      #home h1 {
+          font-size: 2rem; /* Tamanho base para dispositivos pequenos */
+          font-weight: bold;
+          line-height: 1.2;
+      }
+
+      #home p {
+          font-size: 1.25rem; /* Texto menor para subtítulos */
+      }
+
+      /* Ajustes para telas maiores */
+      @media (min-width: 768px) {
+          #home h1 {
+              font-size: 3rem; /* Aumenta o tamanho do título em tablets */
+          }
+
+          #home p {
+              font-size: 1.5rem;
+          }
+      }
+
+      @media (min-width: 1024px) {
+          #home h1 {
+              font-size: 4rem; /* Tamanho maior para telas grandes */
+          }
+
+          #home p {
+              font-size: 1.75rem;
+          }
+      }
+
+      #carousel {
+          position: absolute;
+          inset: 0;
+          z-index: 0; /* Garantir que as imagens fiquem atrás */
+      }
+
+      .carousel-image {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-size: cover;
+          background-position: center;
+          opacity: 0;
+          transition: opacity 1s ease-in-out;
+          z-index: 0; /* Para evitar sobreposição */
+
+      }
+
+      .carousel-image.active {
+          opacity: 1;
+      }
+
+      #carousel::after {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: rgba(0, 0, 0, 0.25);
+          z-index: 1;
+      }
+
+      /* Ensure text is white and visible */
+      .relative.z-10 {
+          color: white;
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+
+      #home .relative.z-10 {
+          position: relative;
+          z-index: 10; /* Mantém o texto por cima das imagens */
+          color: white; /* Ajusta o texto para maior contraste */
+          text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.8); /* Adiciona legibilidade ao texto */
+      }
+
+      #home {
+          position: relative;
+          overflow: hidden; /* Evita que o carrossel ultrapasse os limites */
+          /*height: 100vh; !* Faz o carrossel ocupar a tela inteira *!*/
+      }
+
+      body::before {
+          content: "";
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-image: url('assets/5330763.jpg');
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+          opacity: 0.2; /* Adjust opacity to allow content to be visible */
+          z-index: -1; /* Place behind all other content */
+      }
+
+      #home, #diferenciais, #depoimentos, #contato {
+          background-color: rgba(234, 210, 234, 0.8); /* Slightly transparent pink background */
+          width: 100%;
+      }
+
+      .menu-background {
+          background-color: rgb(162, 137, 183);
+      }
+
+      .gallery-image {
+          cursor: pointer;
+          transition: transform 0.3s ease;
+      }
+
+      .gallery-image:hover {
+          transform: scale(1.05);
+      }
+
+      #galleryModal button {
+          cursor: pointer;
+          padding: 1rem;
+          transition: opacity 0.3s ease;
+      }
+
+      #galleryModal button:hover {
+          opacity: 0.7;
+      }
+  </style>
+</head>
+
+<body class="bg-pink-50">
+<nav class="border p-4 menu-background">
+  <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto">
+    <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
+      <img src="assets/img/logo.jpeg" class="h-8" alt="Logo"/>
+    </a>
+    <button id="menu-toggle" type="button"
+            class="inline-flex items-center p-2 w-10 h-10 justify-center rounded-lg md:hidden focus:outline-none">
+      <svg class="w-5 h-5 text-purple-50" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+        <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M1 1h15M1 7h15M1 13h15"/>
+      </svg>
+    </button>
+    <div class="hidden w-full md:block md:w-auto" id="navbar">
+      <ul class="flex flex-col p-4 md:flex-row md:space-x-8 rtl:space-x-reverse">
+        <li><a href="#home" class="block py-2 px-3 text-purple-50 text-xl">Home</a></li>
+        <li><a href="#sobre" class="block py-2 px-3 text-purple-50 text-xl">Sobre</a></li>
+        <li><a href="#diferenciais" class="block py-2 px-3 text-purple-50 text-xl">Diferenciais</a></li>
+        <li><a href="#fotos" class="block py-2 px-3 text-purple-50 text-xl">Fotos</a></li>
+        <li><a href="#depoimentos" class="block py-2 px-3 text-purple-50 text-xl">Depoimentos</a></li>
+        <li><a href="#endereco" class="block py-2 px-3 text-purple-50 text-xl">Endereço</a></li>
+        <li><a href="#contato" class="block py-2 px-3 text-purple-50 text-xl">Contato</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <section id="home" class="bg-purple-50 text-purple-800 text-center py-40">
+    <div id="carousel" class="absolute inset-0">
+      <div class="carousel-image" data-image="./assets/img/priority/img1.jpeg"></div>
+      <div class="carousel-image" data-image="./assets/img/priority/img2.jpeg"></div>
+      <div class="carousel-image" data-image="./assets/img/priority/img3.jpeg"></div>
+      <div class="carousel-image" data-image="./assets/img/priority/img4.jpeg"></div>
+    </div>
+
+    <div class="relative z-10">
+      <h1 class="text-4xl font-bold mb-4 ">Pensionato Estudantil São Pedro</h1>
+      <p class="text-xl">Pensionato feminino em Lavras </p>
+      <p class="text-xl"><i>O seu lar fora de casa</i></p>
+    </div>
+  </section>
+
+
+  <section id="sobre" class="container mx-auto py-16 px-4">
+    <h2 class="text-3xl font-bold text-center mb-8 text-purple-700">Sobre Nós</h2>
+    <p class="text-center max-w-2xl mx-auto text-purple-600">
+      O Pensionato Estudantil São Pedro é mais do que um lugar para morar – é um lar acolhedor onde segurança,
+      conforto e convivência se encontram. Localizado estrategicamente no centro da cidade, oferecemos estrutura
+      completa, ambiente familiar e um excelente custo-benefício. Aqui, criamos um espaço pensado para facilitar
+      sua rotina, apoiar seus estudos e construir memórias para a vida toda.
+    </p>
+  </section>
+
+  <section id="diferenciais" class="bg-pink-50 py-16">
+    <div class="container mx-auto">
+      <h2 class="text-3xl font-bold text-center mb-8 text-purple-700">Nossos Diferenciais</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-white p-6 rounded shadow text-center text-purple-600 mt-4">
+          <strong>Segurança 24 horas:</strong>
+          Medidas modernas e eficientes para garantir tranquilidade e proteção.
+        </div>
+        <div class="bg-white p-6 rounded shadow text-center text-purple-600 mt-4">
+          <strong>Ambiente acolhedor e familiar:</strong>
+          Sensação de pertencimento, incentivo à convivência e criação de amizades.
+        </div>
+        <div class="bg-white p-6 rounded shadow text-center text-purple-600 mt-4">
+          <strong>Estrutura completa:</strong>
+          Quartos confortáveis, áreas de convivência equipadas, espaço para estudos e lazer, internet de
+          qualidade e faxina semanal.
+        </div>
+        <div class="bg-white p-6 rounded shadow text-center text-purple-600 mt-4">
+          <strong>Localização estratégica:</strong>
+          Proximidade de universidades, escolas, mercados, farmácias, academias, hospital, entre outros
+          serviços essenciais.
+        </div>
+        <div class="bg-white p-6 rounded shadow text-center text-purple-600 mt-4">
+          <strong>Custo-benefício atrativo:</strong>
+          Planos acessíveis e flexíveis com alta qualidade nos serviços oferecidos.
+        </div>
+        <div class="bg-white p-6 rounded shadow text-center text-purple-600 mt-4">
+          <strong>Foco na experiência do hóspede:</strong>
+          Clima de respeito, amizade e cuidado mútuo, com ênfase na criação de laços duradouros.
+        </div>
+        <div class="bg-white p-6 rounded shadow text-center text-purple-600 mt-4">
+          <strong>Economia de tempo:</strong>
+          Localização central que facilita o acesso às principais atividades da rotina.
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="fotos" class="container mx-auto py-16 px-4">
+    <h2 class="text-3xl font-bold text-center mb-8 text-purple-700">Galeria de Fotos</h2>
+    <div id="gallery" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <!-- Images will be dynamically inserted here -->
+    </div>
+  </section>
+
+  <section id="depoimentos" class="bg-pink-50 py-16">
+    <div class="container mx-auto">
+      <h2 class="text-3xl font-bold text-center mb-8 text-purple-700">Depoimentos</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-white p-6 rounded shadow text-purple-600">
+                    <span>
+                        <em>
+                        "O pensionato é um local muito aconchegante, onde há o oferecimento de segurança,
+                        eletrodomésticos de qualidade, estruturas para descanso e estudo, assim como a região
+                        estratégica próxima de pontos de ônibus, mercados e lojas de fácil acesso sem a necessidade de
+                        veículos ou gastos com motoristas de aplicativo!"
+                        </em>
+                    </span>
+          <p class="text-right mt-4 text-purple-500">- Mariana - moradora
+          </p>
+        </div>
+        <div class="bg-white p-6 rounded shadow text-purple-600">
+                    <span>
+                        <em>
+                        "O Pensionato São Pedro é o melhor lugar em Lavras para se morar. Moradoras super gentis,
+                        ambiente agradável e acolhedor, lugar perfeito para meninas que desejam morar em um lugar
+                        confortável e tranquilo para estudos. A Patrícia e o Pedro, proprietários do pensionato, são
+                        extremamente atenciosos com as moradoras e suas demandas. Super recomendo, meus meses no
+                        pensionato foram ótimos! 🥰"
+                        </em>
+                    </span>
+          <p class="text-right mt-4 text-purple-500">- Isis - moradora</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="endereco" class="container mx-auto py-16 px-4">
+    <h2 class="text-3xl font-bold text-center mb-8 text-purple-700">Nosso Endereço</h2>
+    <div class="text-center text-purple-600">
+      <p>Condomínio do Edifício Pereira Teixeira</p>
+      <p>Rua Misseno de Pádua, 589/Ap 201 Centro, Lavras - MG, 37200-142, Brasil</p>
+      <div class="mt-6 flex justify-center space-x-4">
+        <a
+                href="https://www.instagram.com/seu_perfil"
+                target="_blank"
+                class="text-purple-600 hover:text-purple-800 flex items-center space-x-2"
+                aria-label="Acesse nosso Instagram"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+               stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M7.5 3H6A3 3 0 003 6v1.5M16.5 3H18a3 3 0 013 3v1.5M7.5 21H6a3 3 0 01-3-3v-1.5M16.5 21H18a3 3 0 003-3v-1.5M9.75 15.75L15.75 9.75M15.75 15.75L9.75 9.75"/>
+          </svg>
+          <span>Instagram</span>
+        </a>
+        <a
+                href="https://wa.me/+5535992092148"
+                target="_blank"
+                class="text-purple-600 hover:text-purple-800 flex items-center space-x-2"
+                aria-label="Entre em contato pelo WhatsApp"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+               stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M8 21h8a3 3 0 003-3V6a3 3 0 00-3-3H8a3 3 0 00-3 3v12a3 3 0 003 3z"/>
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M12 17.25c1.714 0 3.25-1.536 3.25-3.25S13.714 10.75 12 10.75s-3.25 1.536-3.25 3.25 1.536 3.25 3.25 3.25z"/>
+          </svg>
+          <span>WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div id="galleryModal" class="fixed inset-0 bg-black bg-opacity-90 z-50 hidden flex items-center justify-center">
+    <button id="closeModal" class="absolute top-4 right-4 text-white text-4xl">&times;</button>
+    <button id="prevImage" class="absolute left-4 text-white text-4xl">&lt;</button>
+    <button id="nextImage" class="absolute right-4 text-white text-4xl">&gt;</button>
+    <img id="modalImage" class="max-h-[90vh] max-w-[90vw] object-contain" src="" alt="Imagem ampliada">
+  </div>
+
+</main>
+
+<footer class="menu-background text-white py-6 text-center">
+  © 2024 Minha Empresa. Todos os direitos reservados.
+</footer>
+
+<script>
+    const imageFiles = [
+        'WhatsApp Image 2025-01-12 at 16.46.31 (1).jpeg',
+        'WhatsApp Image 2025-01-12 at 16.46.34.jpeg',
+        'WhatsApp Image 2025-01-12 at 16.46.38 (3).jpeg',
+        'WhatsApp Image 2025-01-12 at 16.46.35 (1).jpeg',
+        'WhatsApp Image 2025-01-12 at 16.46.31.jpeg',
+        'WhatsApp Image 2025-01-12 at 16.46.35 (2).jpeg',
+        'WhatsApp Image 2025-01-12 at 16.46.38 (5).jpeg',
+        'WhatsApp Image 2025-01-12 at 16.46.35.jpeg',
+        'WhatsApp Image 2025-01-12 at 16.46.32.jpeg',
+        'WhatsApp Image 2025-01-12 at 16.46.36.jpeg',
+        'WhatsApp Image 2025-01-12 at 16.46.38 (7).jpeg',
+        'WhatsApp Image 2025-01-12 at 16.46.33 (1).jpeg',
+        'WhatsApp Image 2025-01-12 at 16.46.37 (1).jpeg',
+        'WhatsApp Image 2025-01-12 at 16.46.38.jpeg',
+        'WhatsApp Image 2025-01-12 at 16.46.33 (2).jpeg',
+        'WhatsApp Image 2025-01-12 at 16.46.37.jpeg',
+        'WhatsApp Image 2025-01-12 at 16.46.33.jpeg',
+        'WhatsApp Image 2025-01-12 at 16.46.38 (1).jpeg',
+        'WhatsApp Image 2025-01-12 at 16.46.34 (1).jpeg',
+        'WhatsApp Image 2025-01-12 at 16.46.38 (2).jpeg',
+    ];
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const galleryContainer = document.getElementById('gallery');
+        const modal = document.getElementById('galleryModal');
+        const modalImage = document.getElementById('modalImage');
+        const closeBtn = document.getElementById('closeModal');
+        const prevBtn = document.getElementById('prevImage');
+        const nextBtn = document.getElementById('nextImage');
+        let currentImageIndex = 0;
+        let images = [];
+
+
+        function loadGalleryImages() {
+            imageFiles.forEach((filename, index) => {
+                const imgContainer = document.createElement('div');
+                imgContainer.classList.add('relative', 'overflow-hidden', 'rounded-lg', 'shadow-lg', 'gallery-image');
+
+                const img = document.createElement('img');
+                img.src = `assets/galeria/${filename}`;
+                img.alt = `Galeria ${filename}`;
+                img.classList.add('w-full', 'h-48', 'object-cover');
+
+                imgContainer.appendChild(img);
+                galleryContainer.appendChild(imgContainer);
+                images.push(img.src);
+
+                imgContainer.addEventListener('click', () => openModal(index));
+            });
+        }
+
+        function openModal(index) {
+            currentImageIndex = index;
+            modalImage.src = images[currentImageIndex];
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        function showPrevImage() {
+            currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+            modalImage.src = images[currentImageIndex];
+        }
+
+        function showNextImage() {
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            modalImage.src = images[currentImageIndex];
+        }
+
+        // Event Listeners
+        closeBtn.addEventListener('click', closeModal);
+        prevBtn.addEventListener('click', showPrevImage);
+        nextBtn.addEventListener('click', showNextImage);
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (!modal.classList.contains('hidden')) {
+                if (e.key === 'Escape') closeModal();
+                if (e.key === 'ArrowLeft') showPrevImage();
+                if (e.key === 'ArrowRight') showNextImage();
+            }
+        });
+
+        loadGalleryImages();
+    });
+
+    document.getElementById("menu-toggle").addEventListener("click", function () {
+        document.getElementById("navbar").classList.toggle("hidden");
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const carouselImages = document.querySelectorAll('.carousel-image');
+
+        // Definir imagens para cada elemento do carrossel
+        carouselImages.forEach(img => {
+            if (img.dataset.image) {
+                img.style.backgroundImage = `url(${img.dataset.image})`;
+            } else {
+                console.error('Atributo data-image ausente em:', img);
+            }
+        });
+
+        let currentIndex = 0;
+
+        function changeImage() {
+            carouselImages[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % carouselImages.length;
+            carouselImages[currentIndex].classList.add('active');
+        }
+
+        // Verificar se as imagens foram aplicadas corretamente
+        if (carouselImages.length > 0) {
+            console.log('Imagens do carrossel carregadas:', carouselImages);
+
+            // Iniciar primeiro slide
+            carouselImages[currentIndex].classList.add('active');
+
+            // Troca de imagem a cada 4 segundos
+            setInterval(changeImage, 4000);
+        } else {
+            console.error('Nenhuma imagem encontrada para o carrossel.');
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const menuButton = document.getElementById('menu-button');
+        const menuLinks = document.getElementById('menu-links');
+
+        menuButton.addEventListener('click', () => {
+            // Alterna a visibilidade do menu no lado esquerdo
+            if (menuLinks.classList.contains('-translate-x-full')) {
+                menuLinks.classList.remove('-translate-x-full');
+                menuLinks.classList.add('translate-x-0');
+            } else {
+                menuLinks.classList.add('-translate-x-full');
+                menuLinks.classList.remove('translate-x-0');
+            }
+        });
+    });
+
+
+</script>
+
+</body>
+</html>
