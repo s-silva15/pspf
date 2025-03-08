@@ -137,6 +137,30 @@
       #galleryModal button:hover {
           opacity: 0.7;
       }
+
+       .developer-signature {
+           position: fixed;
+           bottom: 5px;
+           left: 5px;
+           font-size: 10px;
+           color: rgba(128, 102, 153, 0.6);
+           z-index: 10;
+           text-decoration: none;
+           transition: color 0.3s ease;
+           font-family: monospace;
+           display: flex;
+           align-items: center;
+           gap: 3px;
+       }
+
+      .developer-signature:hover {
+          color: rgba(128, 102, 153, 1);
+      }
+
+      .developer-signature i {
+          font-size: 12px;
+      }
+
   </style>
 </head>
 
@@ -144,7 +168,7 @@
 <nav class="border p-4 menu-background">
   <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto">
     <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
-      <img src="assets/img/logo.jpeg" class="h-8" alt="Logo"/>
+      <img src="assets/img/logo.jpeg" class="w-20" alt="Logo"/>
     </a>
     <button id="menu-toggle" type="button"
             class="inline-flex items-center p-2 w-10 h-10 justify-center rounded-lg md:hidden focus:outline-none">
@@ -183,6 +207,12 @@
       <h1 class="text-4xl font-bold mb-4 ">Pensionato Estudantil São Pedro</h1>
       <p class="text-xl">Pensionato feminino em Lavras </p>
       <p class="text-xl"><i>O seu lar fora de casa</i></p>
+      <p>
+        <span>(35) 99209-2148</span>
+        <a href="https://wa.me/+5535992092148" target="_blank" class="" aria-label="Entre em contato pelo WhatsApp">
+          <i class="fa-brands fa-whatsapp text-3xl"></i>
+        </a>
+      </p>
     </div>
   </section>
 
@@ -213,8 +243,11 @@
         <div class="bg-white p-6 rounded-lg shadow flex items-start space-x-4">
           <i class="fa-solid fa-people-group text-purple-600 text-3xl"></i>
           <div>
-            <strong class="text-lg text-purple-700">Ambiente acolhedor</strong>
-            <p class="text-purple-600">Sensação de pertencimento, incentivo à convivência e criação de amizades.</p>
+            <strong class="text-lg text-purple-700">Ambiente acolhedor e familiar</strong>
+            <p class="text-purple-600">Nosso objetivo é criar um ambiente onde você possa se sentir confortável, como se
+              estivesse em casa.
+              A convivência entre as moradoras é incentivada, fortalecendo amizades e criando memórias
+              inesquecíveis.</p>
           </div>
         </div>
 
@@ -222,7 +255,8 @@
           <i class="fa-solid fa-bed text-purple-600 text-3xl"></i>
           <div>
             <strong class="text-lg text-purple-700">Estrutura completa</strong>
-            <p class="text-purple-600">Quartos confortáveis, áreas de lazer, internet e faxina semanal.</p>
+            <p class="text-purple-600">Quartos confortáveis, área de convivência bem equipada, espaço para estudos e
+              lazer, internet de qualidade e faxina semanal.</p>
           </div>
         </div>
 
@@ -230,7 +264,8 @@
           <i class="fa-solid fa-location-dot text-purple-600 text-3xl"></i>
           <div>
             <strong class="text-lg text-purple-700">Localização estratégica</strong>
-            <p class="text-purple-600">Próximo de universidades, mercados, farmácias e serviços essenciais.</p>
+            <p class="text-purple-600">Próximo a universidades, igreja, supermercados, farmácias, padaria, academia,
+              correio, hospital, mercado municipal, bancos e ponto de ônibus.</p>
           </div>
         </div>
 
@@ -238,7 +273,7 @@
           <i class="fa-solid fa-coins text-purple-600 text-3xl"></i>
           <div>
             <strong class="text-lg text-purple-700">Custo-benefício</strong>
-            <p class="text-purple-600">Planos acessíveis e flexíveis com alta qualidade nos serviços.</p>
+            <p class="text-purple-600">Preço acessível com alta qualidade nos serviços.</p>
           </div>
         </div>
 
@@ -254,14 +289,14 @@
           <i class="fa-solid fa-clock text-purple-600 text-3xl"></i>
           <div>
             <strong class="text-lg text-purple-700">Economia de tempo</strong>
-            <p class="text-purple-600">Localização central facilita acesso às atividades do dia a dia.</p>
+            <p class="text-purple-600">Localização central facilitando seu acesso às atividades do dia a dia,
+              economizando tempo e aproveitando ao máximo sua rotina de estudos e lazer.</p>
           </div>
         </div>
 
       </div>
     </div>
   </section>
-
 
 
   <section id="fotos" class="container mx-auto py-16 px-4">
@@ -359,32 +394,36 @@
 </main>
 
 <footer class="menu-background text-white py-6 text-center">
+  <a href="https://github.com/s-silva15" target="_blank" class="developer-signature" aria-label="Desenvolvido por Stanley Silva">
+    <i class="fa-brands fa-github"></i>
+    <span>Stanley Silva</span>
+  </a>
   © 2025 Pensionato São Pedro. Todos os direitos reservados.
 </footer>
 
-
 <script>
     const imageFiles = [
-        'WhatsApp Image 2025-01-12 at 16.46.31 (1).jpeg',
-        'WhatsApp Image 2025-01-12 at 16.46.34.jpeg',
-        'WhatsApp Image 2025-01-12 at 16.46.38 (3).jpeg',
-        'WhatsApp Image 2025-01-12 at 16.46.35 (1).jpeg',
-        'WhatsApp Image 2025-01-12 at 16.46.31.jpeg',
-        'WhatsApp Image 2025-01-12 at 16.46.35 (2).jpeg',
-        'WhatsApp Image 2025-01-12 at 16.46.38 (5).jpeg',
-        'WhatsApp Image 2025-01-12 at 16.46.35.jpeg',
-        'WhatsApp Image 2025-01-12 at 16.46.32.jpeg',
-        'WhatsApp Image 2025-01-12 at 16.46.36.jpeg',
-        'WhatsApp Image 2025-01-12 at 16.46.38 (7).jpeg',
-        'WhatsApp Image 2025-01-12 at 16.46.33 (1).jpeg',
-        'WhatsApp Image 2025-01-12 at 16.46.37 (1).jpeg',
-        'WhatsApp Image 2025-01-12 at 16.46.38.jpeg',
         'WhatsApp Image 2025-01-12 at 16.46.33 (2).jpeg',
-        'WhatsApp Image 2025-01-12 at 16.46.37.jpeg',
+        'WhatsApp Image 2025-01-12 at 16.46.34.jpeg',
+        'WhatsApp Image 2025-01-12 at 16.46.38.jpeg',
+        'WhatsApp Image 2025-01-12 at 16.46.31.jpeg',
+        'WhatsApp Image 2025-01-12 at 16.46.38 (7).jpeg',
+        'WhatsApp Image 2025-01-12 at 16.46.38 (3).jpeg',
+        'WhatsApp Image 2025-01-12 at 16.46.32.jpeg',
+        'WhatsApp Image 2025-01-12 at 16.46.31 (1).jpeg',
+        'WhatsApp Image 2025-01-12 at 16.46.35 (1).jpeg',
+        'WhatsApp Image 2025-01-12 at 16.46.38 (5).jpeg',
+        'WhatsApp Image 2025-01-12 at 16.46.34 (1).jpeg',
         'WhatsApp Image 2025-01-12 at 16.46.33.jpeg',
         'WhatsApp Image 2025-01-12 at 16.46.38 (1).jpeg',
-        'WhatsApp Image 2025-01-12 at 16.46.34 (1).jpeg',
+        'WhatsApp Image 2025-01-12 at 16.46.35.jpeg',
+        'WhatsApp Image 2025-01-12 at 16.46.36.jpeg',
+        'WhatsApp Image 2025-01-12 at 16.46.37.jpeg',
+        'WhatsApp Image 2025-01-12 at 16.46.37 (1).jpeg',
+        'WhatsApp Image 2025-01-12 at 16.46.33 (1).jpeg',
+        'WhatsApp Image 2025-01-12 at 16.46.35 (2).jpeg',
         'WhatsApp Image 2025-01-12 at 16.46.38 (2).jpeg',
+
     ];
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -396,7 +435,6 @@
         const nextBtn = document.getElementById('nextImage');
         let currentImageIndex = 0;
         let images = [];
-
 
         function loadGalleryImages() {
             imageFiles.forEach((filename, index) => {
